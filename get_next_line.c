@@ -53,6 +53,8 @@ int			get_next_line(int const fd, char **line)
 	char		buff[BUFF_SIZE + 1];
 	static char	*save_buff = NULL;
 
+	if (!line)
+		return (-1);
 	if (save_buff && cut_at_newline(&save_buff, line))
 		return (1);
 	while ((bytes_read = read(fd, buff, BUFF_SIZE)) > 0)
@@ -70,7 +72,5 @@ int			get_next_line(int const fd, char **line)
 		ft_strdel(&save_buff);
 		return (1);
 	}
-	if (save_buff)
-		ft_strdel(&save_buff);
 	return (0);
 }
